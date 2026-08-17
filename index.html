@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#292b3a">
+    <title>察して。</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="game-shell" aria-label="夕方の電車内の場面">
+      <svg id="scene" class="scene" viewBox="0 0 390 844" role="img" aria-labelledby="scene-title scene-description">
+        <title id="scene-title">夕方の電車のボックス席</title>
+        <desc id="scene-description">西日が差す窓辺で、祖母がうとうとし、子どもが景色を見ています。窓の上には動かせるブラインドがあります。</desc>
+        <defs>
+          <linearGradient id="carWall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ede1ce"/><stop offset="1" stop-color="#baa995"/></linearGradient>
+          <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ae63"/><stop offset=".56" stop-color="#e87664"/><stop offset="1" stop-color="#6f6b9a"/></linearGradient>
+          <linearGradient id="sunbeam" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="#fff5b0" stop-opacity=".72"/><stop offset="1" stop-color="#ffd56c" stop-opacity=".08"/></linearGradient>
+          <linearGradient id="blindFabric" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6e9d0"/><stop offset="1" stop-color="#d9c39e"/></linearGradient>
+          <filter id="softShadow"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-opacity=".25"/></filter>
+          <clipPath id="windowClip"><rect x="36" y="117" width="318" height="301" rx="15"/></clipPath>
+        </defs>
+
+        <rect width="390" height="844" fill="#282a39"/>
+        <rect x="12" y="18" width="366" height="806" rx="32" fill="url(#carWall)"/>
+        <path d="M12 89H378V18H12Z" fill="#5d5360"/>
+        <rect x="148" y="42" width="94" height="13" rx="6.5" fill="#d9d5ca" opacity=".7"/>
+        <circle cx="195" cy="48.5" r="4" fill="#fff7d0"/>
+
+        <g id="window">
+          <rect x="28" y="108" width="334" height="319" rx="22" fill="#514b54"/>
+          <g clip-path="url(#windowClip)">
+            <rect x="36" y="117" width="318" height="301" fill="url(#sky)"/>
+            <circle cx="303" cy="178" r="43" fill="#ffd87b" opacity=".82"/>
+            <g class="landscape">
+              <path d="M0 334Q62 286 130 327T260 314T410 310V450H0Z" fill="#554f68"/>
+              <path d="M0 367Q80 340 159 370T318 348T420 358V450H0Z" fill="#383f56"/>
+              <g class="poles" stroke="#282f45" stroke-width="4"><path d="M70 267V420M54 292H86M282 243V420M264 270H300"/></g>
+            </g>
+            <g id="bird" class="bird" fill="none" stroke="#3d3d55" stroke-width="3" stroke-linecap="round"><path d="M267 233q8-8 16 0q8-8 16 0"/></g>
+            <rect id="tunnel-dark" x="36" y="117" width="318" height="301" fill="#171a25" opacity="1"/>
+          </g>
+          <path d="M195 111V423" stroke="#685f63" stroke-width="9"/>
+          <path d="M33 423H357" stroke="#81736c" stroke-width="13"/>
+        </g>
+
+        <path id="sun-ray" d="M352 129L83 442L249 519L360 177Z" fill="url(#sunbeam)" opacity="0"/>
+
+        <g id="grandmother" class="person grandmother" tabindex="0" role="button" aria-label="窓側に座っている祖母">
+          <ellipse cx="117" cy="714" rx="75" ry="24" fill="#373b4a" opacity=".22"/>
+          <path class="grandma-body" d="M55 714Q56 566 111 541Q169 561 178 714Z" fill="#876d7d"/>
+          <path class="grandma-shoulders" d="M66 600Q112 568 165 604" fill="none" stroke="#665062" stroke-width="10" stroke-linecap="round"/>
+          <g class="grandma-head">
+            <path d="M71 491Q68 431 118 421Q171 430 164 493Q154 544 117 548Q78 538 71 491Z" fill="#d8a889"/>
+            <path d="M72 472Q65 428 109 411Q159 407 170 456Q143 435 116 439Q87 438 72 472Z" fill="#ded8d3"/>
+            <path d="M79 458Q71 420 104 409Q83 436 91 466" fill="#c5c0bd"/>
+            <path class="grandma-brow" d="M89 481Q99 474 108 481M128 481Q139 475 148 482" fill="none" stroke="#66505a" stroke-width="3" stroke-linecap="round"/>
+            <path class="grandma-eyes" d="M89 493Q99 488 108 493M128 493Q138 488 148 493" fill="none" stroke="#473d46" stroke-width="4" stroke-linecap="round"/>
+            <path d="M113 504q4 5 9 0" fill="none" stroke="#9d6d63" stroke-width="2"/>
+            <path class="grandma-mouth" d="M107 520q11 3 21-1" fill="none" stroke="#855a59" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="shade-hand">
+            <path d="M78 594Q67 545 80 502" fill="none" stroke="#d8a889" stroke-width="15" stroke-linecap="round"/>
+            <path d="M78 502l22-12" fill="none" stroke="#d8a889" stroke-width="12" stroke-linecap="round"/>
+          </g>
+          <g class="help-shadow">
+            <path d="M235 620Q221 553 158 505" fill="none" stroke="#e2ad82" stroke-width="12" stroke-linecap="round"/>
+            <path d="M158 505l-24 2" fill="none" stroke="#e2ad82" stroke-width="10" stroke-linecap="round"/>
+          </g>
+        </g>
+
+        <g id="child" class="person child" tabindex="0" role="button" aria-label="景色を見ている子ども">
+          <ellipse cx="268" cy="722" rx="70" ry="22" fill="#373b4a" opacity=".22"/>
+          <path class="child-body" d="M212 717Q218 588 269 575Q324 589 332 717Z" fill="#4f8090"/>
+          <path d="M231 619l39 36 42-40" fill="none" stroke="#d0a85d" stroke-width="12" stroke-linejoin="round"/>
+          <g class="child-head">
+            <path d="M222 532Q218 473 267 462Q318 469 316 528Q311 576 269 582Q228 574 222 532Z" fill="#e2ad82"/>
+            <path d="M222 512Q215 472 259 451Q309 450 320 499Q289 478 259 487Q237 487 222 512Z" fill="#433943"/>
+            <path d="M232 522h10M287 519h10" stroke="#403943" stroke-width="5" stroke-linecap="round"/>
+            <circle class="child-pupil left" cx="239" cy="522" r="3" fill="#292735"/>
+            <circle class="child-pupil right" cx="294" cy="519" r="3" fill="#292735"/>
+            <path class="child-mouth" d="M260 552q10 6 20-2" fill="none" stroke="#955e56" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="child-hand"><path d="M224 625Q205 581 211 548" fill="none" stroke="#e2ad82" stroke-width="13" stroke-linecap="round"/></g>
+        </g>
+
+        <path d="M22 714Q195 683 368 714V820H22Z" fill="#795e61"/>
+        <path d="M22 737Q195 707 368 737" fill="none" stroke="#a88075" stroke-width="5"/>
+
+        <g id="blind" class="blind">
+          <rect x="30" y="91" width="330" height="35" rx="12" fill="#81756b" filter="url(#softShadow)"/>
+          <path id="blind-fabric" d="M36 113H354V137Q195 145 36 137Z" fill="url(#blindFabric)"/>
+          <g opacity=".28" stroke="#8d795e" stroke-width="1"><path d="M47 118V137M61 118V138M75 118V139M89 118V140M103 118V140M117 118V141M131 118V141M145 118V142M159 118V142M173 118V142M187 118V142M201 118V142M215 118V142M229 118V142M243 118V141M257 118V141M271 118V140M285 118V140M299 118V139M313 118V138M327 118V137M341 118V137"/></g>
+          <g id="blind-handle" class="blind-handle" role="slider" tabindex="0" aria-label="ブラインドの取手" aria-valuemin="0" aria-valuemax="100" aria-valuenow="3">
+            <path id="handle-cord" d="M195 137V153" stroke="#756554" stroke-width="5" stroke-linecap="round"/>
+            <rect x="171" y="150" width="48" height="22" rx="11" fill="#af8b5e" filter="url(#softShadow)"/>
+            <path d="M183 160h24" stroke="#f2d8ad" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+            <rect class="touch-target" x="146" y="126" width="98" height="76" fill="transparent"/>
+          </g>
+        </g>
+
+        <g id="restart" class="restart" role="button" tabindex="0" aria-label="場面を最初から見る">
+          <circle cx="348" cy="786" r="24" fill="#343746" opacity=".78"/>
+          <path d="M357 781a11 11 0 1 1-5-7M356 768v13h-13" fill="none" stroke="#f2e5d1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      <p id="live-status" class="sr-only" aria-live="polite"></p>
+    </main>
+    <script type="module" src="src/game.js"></script>
+  </body>
+</html>
