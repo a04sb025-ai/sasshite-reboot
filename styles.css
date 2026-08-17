@@ -1,0 +1,37 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #171923; --ink: #302d35; }
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; }
+body { min-height: 100svh; background: radial-gradient(circle at 50% 25%, #4b4657, #171923 75%); }
+.game-shell { width: 100%; height: 100dvh; padding: max(4px, env(safe-area-inset-top)) max(4px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(4px, env(safe-area-inset-left)); display: grid; place-items: center; overflow: hidden; }
+.scene { display: block; width: 100%; height: 100%; max-width: 520px; max-height: 100dvh; touch-action: none; user-select: none; -webkit-user-select: none; filter: drop-shadow(0 12px 30px #0008); }
+.illustrated-scene { shape-rendering: geometricPrecision; }
+.grandma-body, .child-body { stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; paint-order: stroke fill; }
+.grandma-head > path:nth-child(1), .grandma-head > path:nth-child(2), .grandma-head > path:nth-child(3), .child-head > path:nth-child(1), .child-head > path:nth-child(2) { stroke: var(--ink); stroke-width: 3.5; stroke-linejoin: round; paint-order: stroke fill; }
+.grandma-eyes, .grandma-brow, .grandma-mouth, .child-mouth { filter: drop-shadow(0 .35px 0 var(--ink)); }
+.grandmother > ellipse, .child > ellipse { filter: blur(1px); }
+.blind { filter: drop-shadow(0 3px 2px #2f273044); }
+.blind-handle > rect:not(.touch-target) { stroke: #403740; stroke-width: 3; paint-order: stroke fill; }
+.train-straps { filter: drop-shadow(0 2px 1px #29263355); }
+.speed-lines { animation: speed-lines 2.8s linear infinite; }
+.blind-handle, .person, .restart { cursor: pointer; outline: none; }
+.blind-handle:focus-visible rect:not(.touch-target), .person:focus-visible .grandma-body, .person:focus-visible .child-body, .restart:focus-visible circle { stroke: #fff2b5; stroke-width: 3; }
+.blind-handle.grabbed > rect:not(.touch-target) { filter: brightness(1.14); }
+.touch-target { pointer-events: all; }
+.landscape, .bird { animation: scenery 12s linear infinite; }
+.bird { animation-duration: 8s; }
+.poles { animation: poles 4.8s linear infinite; }
+.grandma-head, .grandma-shoulders, .shade-hand, .help-shadow, .child-head, .child-body, .child-hand { transform-box: fill-box; transform-origin: center; will-change: transform, opacity; }
+.grandma-body, .grandma-shoulders, .grandma-head, .grandma-brow, .grandma-eyes, .grandma-mouth, .shade-hand, .help-shadow, .child-body, .child-head, .child-pupil, .child-mouth, .child-hand { transition: none; }
+.help-shadow { opacity: 0; }
+.restart { opacity: .35; transition: opacity .25s; }
+.restart:hover, .restart:focus-visible { opacity: .9; }
+.sr-only { position: fixed; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@keyframes scenery { from { transform: translateX(0); } to { transform: translateX(-86px); } }
+@keyframes poles { from { transform: translateX(150px); } to { transform: translateX(-260px); } }
+@keyframes speed-lines { from { transform: translateX(90px); opacity: 0; } 30% { opacity: .5; } to { transform: translateX(-150px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .landscape, .bird, .poles, .speed-lines { animation-duration: 60s; }
+}
+@media (min-aspect-ratio: 4/5) {
+  .scene { max-width: min(520px, 62vh); }
+}
