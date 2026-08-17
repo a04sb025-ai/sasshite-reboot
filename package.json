@@ -1,0 +1,13 @@
+{
+  "name": "sasshite-reboot",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "typecheck": "node --check src/game.js && node --check src/logic.js",
+    "lint": "node scripts/lint.mjs",
+    "test": "node --test",
+    "build": "node scripts/build.mjs"
+  }
+}
