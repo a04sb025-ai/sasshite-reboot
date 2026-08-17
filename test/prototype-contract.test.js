@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const html = await readFile('index.html', 'utf8');
 const css = await readFile('styles.css', 'utf8');
+const game = await readFile('src/game.js', 'utf8');
 
 test('the single scene contains every required interactive actor', () => {
   for (const id of ['scene', 'window', 'blind', 'blind-handle', 'grandmother', 'child', 'sun-ray']) {
@@ -22,8 +23,19 @@ test('mobile interaction prevents scene scrolling and respects safe areas', () =
   assert.match(css, /100dvh/);
 });
 
-test('the handle exposes a touch target larger than 44 SVG units', () => {
-  const target = html.match(/class="touch-target"[^>]*width="(\d+)"[^>]*height="(\d+)"/);
-  assert.ok(target);
-  assert.ok(Number(target[1]) >= 44 && Number(target[2]) >= 44);
+test('interactive SVG is a labelled group rather than an atomic image', () => {
+  assert.match(html, /<svg[^>]*id="scene"[^>]*role="group"[^>]*aria-labelledby="scene-title scene-description"/);
+  assert.doesNotMatch(html, /<svg[^>]*id="scene"[^>]*role="img"/);
+});
+
+test('the handle exposes a responsive minimum 48 CSS pixel touch target', () => {
+  assert.match(game, /const minSvgSize = 48 \/ scale/);
+  assert.match(game, /touchTarget\.setAttribute\('width'/);
+  assert.match(game, /window\.addEventListener\('resize', resizeTouchTarget\)/);
+});
+
+test('restart cancels pending intro timers before scheduling a new intro', () => {
+  assert.match(game, /function clearIntroTimers\(\)/);
+  assert.match(game, /window\.clearTimeout/);
+  assert.match(game, /function resetScene\(\) \{\n  clearIntroTimers\(\);/);
 });
