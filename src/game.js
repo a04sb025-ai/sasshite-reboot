@@ -3,6 +3,7 @@ import { clamp, deriveNpcState, updateAfterProgress, calculateRoughness } from '
 const $ = (selector) => document.querySelector(selector);
 const svg = $('#scene');
 const handle = $('#blind-handle');
+const touchTarget = handle.querySelector('.touch-target');
 const fabric = $('#blind-fabric');
 const cord = $('#handle-cord');
 const tunnel = $('#tunnel-dark');
@@ -25,13 +26,29 @@ const bottomY = 415;
 const state = {
   target: 0.03, display: 0.03, sunlight: 0, after: 0, lastTime: performance.now(),
   dragging: false, dragOffset: 0, samples: [], roughUntil: 0, idleSince: performance.now(),
-  grandmaTapUntil: 0, childTapUntil: 0, audio: null, lastMoveSound: 0
+  grandmaTapUntil: 0, childTapUntil: 0, audio: null, lastMoveSound: 0, introTimers: []
 };
 
 function svgPoint(event) {
   const point = new DOMPoint(event.clientX, event.clientY);
   return point.matrixTransform(svg.getScreenCTM().inverse());
 }
+
+function resizeTouchTarget() {
+  const rect = svg.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  const scale = Math.min(rect.width / 390, rect.height / 844);
+  if (!scale) return;
+  const minSvgSize = 48 / scale;
+  const width = Math.max(98, minSvgSize);
+  const height = Math.max(76, minSvgSize);
+  touchTarget.setAttribute('x', String(195 - width / 2));
+  touchTarget.setAttribute('y', String(164 - height / 2));
+  touchTarget.setAttribute('width', String(width));
+  touchTarget.setAttribute('height', String(height));
+}
+resizeTouchTarget();
+window.addEventListener('resize', resizeTouchTarget);
 
 function ensureAudio() {
   if (state.audio) return state.audio;
@@ -133,13 +150,21 @@ for (const [element, name] of [[grandmother, 'grandmother'], [child, 'child']]) 
   element.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') tapPerson(name); });
 }
 
+function clearIntroTimers() {
+  state.introTimers.forEach((timer) => window.clearTimeout(timer));
+  state.introTimers = [];
+}
+
 function resetScene() {
+  clearIntroTimers();
   state.target = 0.03; state.display = 0.03; state.after = 0; state.sunlight = 0;
   state.samples = []; state.roughUntil = 0; state.idleSince = performance.now();
   tunnel.getAnimations().forEach((animation) => animation.cancel());
   tunnel.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-  window.setTimeout(() => tunnel.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1800, fill: 'forwards', easing: 'ease-out' }), 1300);
-  window.setTimeout(() => { state.sunlight = 1; }, 1700);
+  state.introTimers.push(window.setTimeout(() => {
+    tunnel.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1800, fill: 'forwards', easing: 'ease-out' });
+  }, 1300));
+  state.introTimers.push(window.setTimeout(() => { state.sunlight = 1; }, 1700));
 }
 restart.addEventListener('pointerdown', (event) => { resetScene(); tone(210, .08, .018); event.preventDefault(); });
 restart.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') resetScene(); });
